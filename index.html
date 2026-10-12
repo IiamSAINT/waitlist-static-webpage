@@ -104,7 +104,7 @@
       feedbackForm.reset();
       feedbackForm.querySelector('button[type="submit"]').disabled = false;
       feedbackStatus.dataset.state = 'success';
-      feedbackStatus.textContent = 'Thanks — your response was sent to Google Forms. Check the sheet if it does not appear shortly.';
+      feedbackStatus.textContent = 'Thanks — your response was received';
     };
     feedbackForm.addEventListener('submit', () => {
       waitingForGoogleResponse = true;
