@@ -73,24 +73,17 @@
     .feedback-status{min-height:20px;margin:0;color:#6e7890;font-size:12px;line-height:1.5}
     .feedback-status[data-state="error"]{color:#a23535}.feedback-status[data-state="success"]{color:#16704d}
     .form-response-frame{position:absolute;width:0;height:0;border:0;visibility:hidden}
-    .success-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:rgba(4,15,48,.76);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease;isolation:isolate;overflow:hidden}
-    .success-overlay:before{content:"";position:absolute;z-index:-1;inset:-35%;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 54px,rgba(130,170,255,.18) 55px,transparent 57px 108px);animation:line-sweep 8s linear infinite}
+    .success-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:rgba(16,24,40,.45);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
     .success-overlay.is-open{opacity:1;visibility:visible}
-    .success-card{position:relative;width:min(460px,100%);overflow:hidden;border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:42px 34px 32px;background:linear-gradient(145deg,#fff 0%,#f4f7ff 100%);text-align:center;box-shadow:0 35px 100px rgba(0,0,0,.35);transform:translateY(28px) scale(.94);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
-    .success-overlay.is-open .success-card{transform:translateY(0) scale(1)}
-    .success-card:before,.success-card:after{content:"✦";position:absolute;color:#f0bd33;animation:sparkle 2.4s ease-in-out infinite}.success-card:before{top:31px;left:31px;font-size:19px}.success-card:after{right:34px;top:72px;font-size:14px;animation-delay:.6s}
-    .success-mascot{width:118px;height:118px;margin:0 auto 23px;display:grid;place-items:center;position:relative;border-radius:50%;background:linear-gradient(145deg,#527eea,#082471);box-shadow:0 14px 30px rgba(8,36,113,.3);animation:mascot-pop .75s cubic-bezier(.2,.8,.2,1) both,mascot-float 3s ease-in-out .75s infinite}
-    .success-mascot img{width:100px;height:100px;object-fit:cover;border:4px solid #fff;border-radius:50%;box-shadow:0 4px 14px rgba(8,36,113,.2)}
-    .success-kicker{margin:0 0 10px;color:#3d5ca7;font:700 10px 'Space Grotesk',sans-serif;letter-spacing:.2em;text-transform:uppercase}
+    .success-card{position:relative;width:min(420px,100%);border-radius:5px;padding:34px 30px 28px;background:#fff;text-align:center;box-shadow:0 18px 50px rgba(8,36,113,.16);transform:translateY(10px);transition:transform .2s ease}
+    .success-overlay.is-open .success-card{transform:translateY(0)}
+    .success-mascot{width:76px;height:76px;margin:0 auto 20px;display:grid;place-items:center;position:relative;border-radius:50%;background:#f5f0e8}
+    .success-mascot img{width:68px;height:68px;object-fit:cover;border:2px solid #fff;border-radius:50%}
+    .success-kicker{margin:0 0 9px;color:#3d5ca7;font:700 10px 'Space Grotesk',sans-serif;letter-spacing:.15em;text-transform:uppercase}
     .success-card h2{margin:0;color:#101828;font:700 clamp(30px,7vw,39px)/1.05 'Space Grotesk',sans-serif;letter-spacing:-.055em}
     .success-card p{margin:13px auto 23px;max-width:330px;color:#65718a;font-size:14px;line-height:1.65}
     .success-card .btn{border:0;cursor:pointer;min-width:230px}.redirect-note{display:block;margin-top:14px;color:#8992a5;font-size:11px}
-    @keyframes mascot-pop{from{opacity:0;transform:scale(.45) rotate(-16deg)}to{opacity:1;transform:scale(1) rotate(0)}}
-    @keyframes mascot-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
-    @keyframes check-pop{from{opacity:0;scale:.2;rotate:-30deg}to{opacity:1;scale:1;rotate:0}}
-    @keyframes sparkle{0%,100%{opacity:.35;scale:.7;rotate:0}50%{opacity:1;scale:1.25;rotate:25deg}}
-    @keyframes line-sweep{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,0,0)}}
-    @media(prefers-reduced-motion:reduce){.success-overlay,.success-card{transition:none}.success-mascot,.success-overlay:before,.success-card:before,.success-card:after{animation:none!important}}
+    @media(prefers-reduced-motion:reduce){.success-overlay,.success-card{transition:none}}
     @media(max-width:800px){.feedback{padding:70px 0}.feedback-panel{grid-template-columns:1fr;gap:32px}.feedback-profile img{width:70px;height:70px}.feedback-form button{width:100%}}
   </style>
 </head>
