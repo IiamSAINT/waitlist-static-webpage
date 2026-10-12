@@ -73,30 +73,60 @@
     .feedback-status{min-height:20px;margin:0;color:#6e7890;font-size:12px;line-height:1.5}
     .feedback-status[data-state="error"]{color:#a23535}.feedback-status[data-state="success"]{color:#16704d}
     .form-response-frame{position:absolute;width:0;height:0;border:0;visibility:hidden}
+    .success-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:24px;background:rgba(4,15,48,.76);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease;isolation:isolate;overflow:hidden}
+    .success-overlay:before{content:"";position:absolute;z-index:-1;inset:-35%;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 54px,rgba(130,170,255,.18) 55px,transparent 57px 108px);animation:line-sweep 8s linear infinite}
+    .success-overlay.is-open{opacity:1;visibility:visible}
+    .success-card{position:relative;width:min(460px,100%);overflow:hidden;border:1px solid rgba(255,255,255,.7);border-radius:22px;padding:42px 34px 32px;background:linear-gradient(145deg,#fff 0%,#f4f7ff 100%);text-align:center;box-shadow:0 35px 100px rgba(0,0,0,.35);transform:translateY(28px) scale(.94);transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+    .success-overlay.is-open .success-card{transform:translateY(0) scale(1)}
+    .success-card:before,.success-card:after{content:"✦";position:absolute;color:#f0bd33;animation:sparkle 2.4s ease-in-out infinite}.success-card:before{top:31px;left:31px;font-size:19px}.success-card:after{right:34px;top:72px;font-size:14px;animation-delay:.6s}
+    .success-mascot{width:118px;height:118px;margin:0 auto 23px;display:grid;place-items:center;position:relative;border-radius:50%;background:linear-gradient(145deg,#527eea,#082471);box-shadow:0 14px 30px rgba(8,36,113,.3);animation:mascot-pop .75s cubic-bezier(.2,.8,.2,1) both,mascot-float 3s ease-in-out .75s infinite}
+    .success-mascot img{width:100px;height:100px;object-fit:cover;border:4px solid #fff;border-radius:50%;box-shadow:0 4px 14px rgba(8,36,113,.2)}
+    .success-kicker{margin:0 0 10px;color:#3d5ca7;font:700 10px 'Space Grotesk',sans-serif;letter-spacing:.2em;text-transform:uppercase}
+    .success-card h2{margin:0;color:#101828;font:700 clamp(30px,7vw,39px)/1.05 'Space Grotesk',sans-serif;letter-spacing:-.055em}
+    .success-card p{margin:13px auto 23px;max-width:330px;color:#65718a;font-size:14px;line-height:1.65}
+    .success-card .btn{border:0;cursor:pointer;min-width:230px}.redirect-note{display:block;margin-top:14px;color:#8992a5;font-size:11px}
+    @keyframes mascot-pop{from{opacity:0;transform:scale(.45) rotate(-16deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+    @keyframes mascot-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+    @keyframes check-pop{from{opacity:0;scale:.2;rotate:-30deg}to{opacity:1;scale:1;rotate:0}}
+    @keyframes sparkle{0%,100%{opacity:.35;scale:.7;rotate:0}50%{opacity:1;scale:1.25;rotate:25deg}}
+    @keyframes line-sweep{from{transform:translate3d(-2%,0,0)}to{transform:translate3d(2%,0,0)}}
+    @media(prefers-reduced-motion:reduce){.success-overlay,.success-card{transition:none}.success-mascot,.success-overlay:before,.success-card:before,.success-card:after{animation:none!important}}
     @media(max-width:800px){.feedback{padding:70px 0}.feedback-panel{grid-template-columns:1fr;gap:32px}.feedback-profile img{width:70px;height:70px}.feedback-form button{width:100%}}
   </style>
 </head>
 <body>
   <header class="hero-shell">
-    <div class="wrap topbar"><a class="brand" href="#top" aria-label="G1FTED home">G1FTED</a><nav class="nav" aria-label="Main navigation"><a href="#why">Why Notion</a><a href="#kit">The Starter Kit</a><a class="nav-cta" href="#feedback">Share an idea <span class="arrow">↓</span></a></nav></div>
+    <div class="wrap topbar"><a class="brand" href="#top" aria-label="G1FTED home">G1FTED</a><nav class="nav" aria-label="Main navigation"><a href="#why">Why Notion</a><a href="#kit">The Starter Kit</a><a class="nav-cta" href="#feedback-form">Get started <span class="arrow">↓</span></a></nav></div>
     <main class="wrap hero" id="top">
-      <div><div class="eyebrow">A clearer way to get things done</div><h1><span class="title">TTBP 2.0</span><span class="life">Your life doesn't need more chaos.</span></h1><p class="hero-copy">It needs a better system. Discover how to use Notion to organise your tasks, manage your goals, and build a productivity system that works for you.</p><div class="hero-actions"><a class="btn" href="https://bit.ly/4yMNdoS" target="_blank" rel="noopener noreferrer">Get the Free Starter Kit <span class="arrow">↗</span></a><div class="launch-note">Launch day<strong>October 30, 2026</strong></div></div></div>
+      <div><div class="eyebrow">A clearer way to get things done</div><h1><span class="title">TTBP 2.0</span><span class="life">Your life doesn't need more chaos.</span></h1><p class="hero-copy">It needs a better system. Discover how to use Notion to organise your tasks, manage your goals, and build a productivity system that works for you.</p><div class="hero-actions"><a class="btn" href="#feedback-form">Get the Free Starter Kit <span class="arrow">↓</span></a><div class="launch-note">Launch day<strong>October 30, 2026</strong></div></div></div>
       <div class="visual" aria-label="Preview of a Notion productivity workspace"><div class="float-card float-one"><span class="mini-dot"></span> Your week, in view<b>Plan with intention</b><div class="progress"><i></i></div></div><div class="screen"><div class="screen-bar"><span>G1FTED / YOUR WORKSPACE</span><span class="dots"><i></i><i></i><i></i></span></div><img src="images/Screenshot_20261011_131752_Notion.jpg" alt="Notion task workspace with task, area, status and priority columns"><div class="screen-caption">Make room for what matters.</div></div><div class="float-card float-two">GOALS · TASKS · IDEAS<b>All in one place.</b></div></div>
     </main>
   </header>
   <div class="date-strip"><div class="wrap date-inner"><strong>TTBP 2.0 · G1FTED</strong><span>Free Notion Productivity Starter Kit · October 30, 2026</span></div></div>
   <section id="why"><div class="wrap"><div class="section-kicker">01 / The problem</div><h2 class="section-title">Being busy isn't the same as being organised.</h2><p class="section-intro">When everything lives everywhere, it’s hard to know what deserves your attention next.</p><div class="problem-grid"><article class="problem"><span class="number">01</span><h3>Scattered thoughts</h3><p>Notes, ideas, and tasks spread across apps, pages, and messages.</p></article><article class="problem"><span class="number">02</span><h3>Too many priorities</h3><p>A long list, no clear next step, and the feeling that everything is urgent.</p></article><article class="problem"><span class="number">03</span><h3>Plans that don't stick</h3><p>Good intentions get lost when routines are difficult to maintain.</p></article></div></div></section>
   <section class="solution"><div class="wrap solution-layout"><div><div class="section-kicker">02 / The solution</div><h2 class="section-title">One space. More clarity. Less chaos.</h2><p class="section-intro">Notion gives your everyday life a home, so you can spend less energy keeping track and more energy moving forward.</p></div><div class="solution-list"><div class="solution-item"><span>01</span>Organise everyday tasks</div><div class="solution-item"><span>02</span>Plan your days and weeks</div><div class="solution-item"><span>03</span>Track goals and projects</div><div class="solution-item"><span>04</span>Build a personal productivity workspace</div></div></div></section>
-  <section class="kit" id="kit"><div class="wrap kit-grid"><div><div class="section-kicker">03 / Your starting point</div><h2 class="section-title">A practical first step, made for beginners.</h2><p>The free Notion Productivity Starter Kit helps you figure out what you need and turn it into a workspace you’ll actually use.</p><a class="btn" href="https://bit.ly/4yMNdoS" target="_blank" rel="noopener noreferrer">Get the Free Starter Kit <span class="arrow">↗</span></a></div><ul class="kit-list"><li><span class="check">↗</span>Identify your productivity needs</li><li><span class="check">↗</span>Use ChatGPT to generate a personalised workspace plan</li><li><span class="check">↗</span>Create a prompt to help build your Notion workspace</li><li><span class="check">↗</span>Follow a beginner-friendly Notion guide</li><li><span class="check">↗</span>Develop daily and weekly planning routines</li></ul></div></section>
+  <section class="kit" id="kit"><div class="wrap kit-grid"><div><div class="section-kicker">03 / Your starting point</div><h2 class="section-title">A practical first step, made for beginners.</h2><p>The free Notion Productivity Starter Kit helps you figure out what you need and turn it into a workspace you’ll actually use.</p><a class="btn" href="#feedback-form">Get the Free Starter Kit <span class="arrow">↓</span></a></div><ul class="kit-list"><li><span class="check">↗</span>Identify your productivity needs</li><li><span class="check">↗</span>Use ChatGPT to generate a personalised workspace plan</li><li><span class="check">↗</span>Create a prompt to help build your Notion workspace</li><li><span class="check">↗</span>Follow a beginner-friendly Notion guide</li><li><span class="check">↗</span>Develop daily and weekly planning routines</li></ul></div></section>
   <section class="feedback" id="feedback"><div class="wrap feedback-panel"><div><div class="section-kicker">04 / Your ideas</div><div class="feedback-profile"><img src="images/avatar.png" alt="G1FTED avatar"><span>Build with G1FTED</span></div><h2>What would help you right now?</h2><p class="feedback-copy">Tell us what digital product would make your life easier. Your idea can shape what G1FTED builds next.</p></div><form class="feedback-form" id="feedback-form" action="https://docs.google.com/forms/d/e/1FAIpQLSd_-Ibc9Uzup2y1bOhdrGPphB5IfLkkpnuqAi2MFsp026ChZA/formResponse" method="POST" target="google-form-response"><label for="gmail-address">Gmail address <span aria-hidden="true">*</span><input id="gmail-address" name="entry.923374060" type="email" autocomplete="email" placeholder="you@gmail.com" pattern=".+@[Gg][Mm][Aa][Ii][Ll]\.com" title="Enter a Gmail address ending in @gmail.com" required></label><label for="product-idea">If G1FTED could build a digital product to help you right now, what would it be? <span class="optional">Optional</span><textarea id="product-idea" name="entry.1535370637" placeholder="Share your idea..."></textarea></label><button class="btn" type="submit">Send my idea <span class="arrow">↗</span></button><p class="feedback-status" id="feedback-status" role="status" aria-live="polite"></p></form><iframe name="google-form-response" title="Google Forms response" class="form-response-frame" aria-hidden="true" tabindex="-1"></iframe></div></section>
-  <section class="register" id="register"><div class="wrap register-panel"><div><div class="section-kicker">05 / Start with a reset</div><h2 class="section-title">Ready to get organised?</h2><p>Register for free and get started with the Notion Productivity Starter Kit. It takes one small step to make space for better systems.</p></div><div class="register-right"><a class="btn" href="https://bit.ly/4yMNdoS" target="_blank" rel="noopener noreferrer">Register for Free <span class="arrow">↗</span></a><small>Continues to G1FTED on WhatsApp.<br>Free to join · No live event</small></div></div></section>
+  <section class="register" id="register"><div class="wrap register-panel"><div><div class="section-kicker">05 / Start with a reset</div><h2 class="section-title">Ready to get organised?</h2><p>Register for free and get started with the Notion Productivity Starter Kit. It takes one small step to make space for better systems.</p></div><div class="register-right"><a class="btn" href="#feedback-form">Register for Free <span class="arrow">↓</span></a><small>Complete the form to continue to G1FTED on WhatsApp.<br>Free to join · No live event</small></div></div></section>
+  <div class="success-overlay" id="success-overlay" aria-hidden="true"><section class="success-card" role="dialog" aria-modal="true" aria-labelledby="success-title" aria-describedby="success-description"><div class="success-mascot" aria-hidden="true"><img src="images/avatar.png" alt=""></div><p class="success-kicker">G1FTED · TTBP 2.0</p><h2 id="success-title">You're on your way!</h2><p id="success-description">Your response is in. We'll take you to WhatsApp next so you can get started with your free starter kit.</p><button class="btn" id="continue-whatsapp" type="button">Continue to WhatsApp <span class="arrow">↗</span></button><small class="redirect-note">Taking you there in <span id="redirect-countdown">4</span> seconds…</small></section></div>
   <footer class="footer"><div class="wrap footer-inner"><span class="brand">G1FTED</span><span>TTBP 2.0 · Unlocking the Power of Notion</span><a href="#top">Back to top ↑</a></div></footer>
   <script>
     const feedbackForm = document.querySelector('#feedback-form');
     const feedbackStatus = document.querySelector('#feedback-status');
     const responseFrame = document.querySelector('.form-response-frame');
+    const successOverlay = document.querySelector('#success-overlay');
+    const redirectCountdown = document.querySelector('#redirect-countdown');
+    const whatsappUrl = 'https://bit.ly/4yMNdoS';
     let waitingForGoogleResponse = false;
     let responseFallbackTimer;
+    let redirectTimer;
+    let countdownTimer;
+    const redirectToWhatsApp = () => { window.location.href = whatsappUrl; };
+    const closeSuccessPopup = () => {
+      successOverlay.classList.remove('is-open');
+      successOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
     const finishFeedbackSubmission = () => {
       if (!waitingForGoogleResponse) return;
       waitingForGoogleResponse = false;
@@ -104,7 +134,19 @@
       feedbackForm.reset();
       feedbackForm.querySelector('button[type="submit"]').disabled = false;
       feedbackStatus.dataset.state = 'success';
-      feedbackStatus.textContent = 'Thanks — your response was received';
+      feedbackStatus.textContent = 'Thanks — your response was received. Redirecting to WhatsApp…';
+      successOverlay.classList.add('is-open');
+      successOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.querySelector('#continue-whatsapp').focus();
+      let secondsLeft = 4;
+      redirectCountdown.textContent = secondsLeft;
+      countdownTimer = window.setInterval(() => {
+        secondsLeft -= 1;
+        redirectCountdown.textContent = secondsLeft;
+        if (secondsLeft <= 0) window.clearInterval(countdownTimer);
+      }, 1000);
+      redirectTimer = window.setTimeout(redirectToWhatsApp, 4000);
     };
     feedbackForm.addEventListener('submit', () => {
       waitingForGoogleResponse = true;
@@ -116,6 +158,10 @@
     });
     responseFrame.addEventListener('load', () => {
       if (waitingForGoogleResponse) finishFeedbackSubmission();
+    });
+    document.querySelector('#continue-whatsapp').addEventListener('click', redirectToWhatsApp);
+    successOverlay.addEventListener('click', (event) => {
+      if (event.target === successOverlay) closeSuccessPopup();
     });
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     requestAnimationFrame(() => document.body.classList.add('is-loaded'));
